@@ -9,9 +9,9 @@ import org.apache.pdfbox.io.MemoryUsageSetting;
 import org.apache.pdfbox.multipdf.PDFMergerUtility;
 
 /**
- * PdfFileUtil
+ * PdfBoxUtil
  */
-public class PdfFileUtil {
+public class PdfBoxUtil {
 
     /**
      * test
@@ -26,7 +26,7 @@ public class PdfFileUtil {
     }
 
     /**
-     * 合并pdf
+     * 合并多个pdf文件
      *
      * @param files      文件列表
      * @param targetPath 合并路径

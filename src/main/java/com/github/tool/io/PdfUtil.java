@@ -1,7 +1,9 @@
 package com.github.tool.io;
 
+import cn.hutool.core.date.SystemClock;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.lang.Validator;
+import com.github.tool.io.enums.LabelTypeEnum;
 import com.google.common.collect.Lists;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
@@ -27,21 +29,22 @@ public class PdfUtil {
         SkuPrintLabel skuPrintLabel1 = new SkuPrintLabel();
         skuPrintLabel1.setSkuName("手机1");
         skuPrintLabel1.setContent("SKU-001");
-        skuPrintLabel1.setBarcodeFilePath("C:\\Users\\AkaneMurakawa\\AppData\\Local\\Temp\\SKU-001.png");
+        skuPrintLabel1.setBarcodeFilePath("C:\\Users\\admin\\AppData\\Local\\Temp\\SKU-001.png");
         skuPrintLabels.add(skuPrintLabel1);
 
         SkuPrintLabel skuPrintLabel2 = new SkuPrintLabel();
         skuPrintLabel2.setSkuName("手机2");
         skuPrintLabel2.setContent("SKU-001");
-        skuPrintLabel2.setBarcodeFilePath("C:\\Users\\AkaneMurakawa\\AppData\\Local\\Temp\\SKU-001.png");
+        skuPrintLabel2.setBarcodeFilePath("C:\\Users\\admin\\AppData\\Local\\Temp\\SKU-001.png");
         skuPrintLabels.add(skuPrintLabel2);
 
         // 生成pdf
         Document document = null;
         try {
-            RectangleReadOnly pageSize = new RectangleReadOnly(70.0F, 34.0F);
+            LabelTypeEnum label74 = LabelTypeEnum.LABEL_7_4;
+            RectangleReadOnly pageSize = new RectangleReadOnly(label74.getWidth(), label74.getHeight());
             document = new Document(pageSize, 0, 0, 0, 0);
-            String pathname = FileUtil.getTmpDirPath() + File.separator + "barcode.pdf";
+            String pathname = FileUtil.getTmpDirPath() + File.separator + "label_" + SystemClock.now() + ".pdf";
             PdfUtil.createPrintLabelPdf(document, skuPrintLabels, pathname);
         } finally {
             Optional.ofNullable(document).ifPresent(Document::close);
@@ -59,9 +62,18 @@ public class PdfUtil {
         }
 
         // 多个base64转pdf
-        String pathname = FileUtil.getTmpDirPath() + File.separator + "merge.pdf";
+        String pathname = FileUtil.getTmpDirPath() + File.separator + "mergeMulBase64.pdf";
         File file = new File(pathname);
         createPdfFromBase64(data, file);
+
+        // 合并文件
+        List<File> files = new ArrayList<>();
+        for (int i = 0; i < data.size(); i++) {
+            files.add(new File(FileUtil.getTmpDirPath() + File.separator + i + ".pdf"));
+        }
+        pathname = FileUtil.getTmpDirPath() + File.separator + "mergeMulFile.pdf";
+        file = new File(pathname);
+        mergeMulFile(files, file);
 
     }
 
@@ -148,7 +160,7 @@ public class PdfUtil {
     }
 
     /**
-     * base64转pdf
+     * 多个base64转pdf
      */
     public static void createPdfFromBase64(List<String> base64List, File file) throws IOException, DocumentException {
         @Cleanup FileOutputStream outputStream = new FileOutputStream(file);
@@ -162,6 +174,37 @@ public class PdfUtil {
             for (String base64 : base64List) {
                 bytes = Base64.getDecoder().decode(base64);
                 pdfReader = new PdfReader(bytes);
+                int pages = pdfReader.getNumberOfPages();
+                // 遍历pdf文档
+                for (int i = 1; i <= pages; i++) {
+                    document.newPage();
+                    PdfImportedPage page = copy.getImportedPage(pdfReader, i);
+                    copy.addPage(page);
+                }
+            }
+        } finally {
+            Optional.ofNullable(document).ifPresent(Document::close);
+        }
+    }
+
+    /**
+     * 合并多个pdf文件
+     *
+     * @param files  文件列表
+     * @param target 保存文件
+     */
+    public static void mergeMulFile(List<File> files, File target) throws IOException, DocumentException {
+        @Cleanup FileOutputStream outputStream = new FileOutputStream(target);
+        Document document = null;
+        try {
+            @Cleanup FileInputStream inputStream = new FileInputStream(files.get(0));
+            PdfReader pdfReader = new PdfReader(inputStream);
+            document = new Document(pdfReader.getPageSize(1));
+            PdfCopy copy = new PdfCopy(document, outputStream);
+            document.open();
+            for (File file : files) {
+                inputStream = new FileInputStream(file);
+                pdfReader = new PdfReader(inputStream);
                 int pages = pdfReader.getNumberOfPages();
                 // 遍历pdf文档
                 for (int i = 1; i <= pages; i++) {
