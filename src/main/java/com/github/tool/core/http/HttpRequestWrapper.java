@@ -25,16 +25,20 @@ public class HttpRequestWrapper {
 
     private final StopWatch stopWatch = new StopWatch(Thread.currentThread().getName());
 
-    private final List<HttpRequestInterceptor> interceptors = new ArrayList<>();
+    private static final List<HttpRequestInterceptor> interceptors = new ArrayList<>();
+
+    static {
+        // addInterceptors
+        interceptors.add(new HttpRequestLogInterceptor());
+        interceptors.add(new HttpRequestHeadersInterceptor());
+        interceptors.add(new HttpRequestCookiesInterceptor());
+        interceptors.sort(Comparator.comparing(HttpRequestInterceptor::getOrder));
+    }
 
     private final HttpRequest httpRequest;
 
     public HttpRequestWrapper(HttpRequest httpRequest) {
         this.httpRequest = httpRequest;
-        // addInterceptors
-        addInterceptors(new HttpRequestLogInterceptor());
-        addInterceptors(new HttpRequestHeadersInterceptor());
-        addInterceptors(new HttpRequestCookiesInterceptor());
     }
 
     public HttpRequestWrapper isLogEnabled(boolean isLogEnabled) {
@@ -42,15 +46,10 @@ public class HttpRequestWrapper {
         return this;
     }
 
-    public void addInterceptors(HttpRequestInterceptor interceptor) {
-        interceptors.add(interceptor);
-    }
-
     private void before() {
         if (CollectionUtil.isEmpty(interceptors)) {
             return;
         }
-        interceptors.sort(Comparator.comparing(HttpRequestInterceptor::getOrder));
         for (HttpRequestInterceptor interceptor : interceptors) {
             if (!interceptor.beforeHandle(this)) {
                 break;
