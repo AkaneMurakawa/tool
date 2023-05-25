@@ -1,4 +1,4 @@
-package com.github.tool.core.net;
+package com.github.tool.core.http;
 
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
@@ -10,6 +10,7 @@ import org.springframework.lang.Nullable;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.text.DecimalFormat;
 import java.util.Objects;
 
 /**
@@ -119,6 +120,32 @@ public class HttpUtils {
 
     private static boolean unknownIP(String ip) {
         return StringUtils.isEmpty(ip) || "unknown".equalsIgnoreCase(ip);
+    }
+
+    public static String getSize(String str) {
+        return getSize(str.length());
+    }
+
+    /**
+     * 将字节大小转换为KB、MB、GB，并保留两位小数
+     */
+    public static String getSize(long size) {
+        final int GB = 1024 * 1024 * 1024;
+        final int MB = 1024 * 1024;
+        final int KB = 1024;
+        // 格式化小数
+        DecimalFormat df = new DecimalFormat("0.00");
+        String resultSize;
+        if (size / GB >= 1) {
+            resultSize = df.format(size / (float) GB) + " GB";
+        } else if (size / MB >= 1) {
+            resultSize = df.format(size / (float) MB) + " MB";
+        } else if (size / KB >= 1) {
+            resultSize = df.format(size / (float) KB) + " KB";
+        } else {
+            resultSize = size + " B";
+        }
+        return resultSize;
     }
 
 }
