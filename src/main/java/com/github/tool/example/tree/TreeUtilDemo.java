@@ -15,12 +15,12 @@ public class TreeUtilDemo {
      * test
      */
     public static void main(String[] args) {
-        TreeUtilDemo demo = new TreeUtilDemo();
-        List<OrganizationTree> trees = demo.listTree();
+        // 构建树
+        List<OrganizationTree> trees = new TreeUtilDemo().buildTree();
         System.out.println(JsonUtils.toStr(trees));
     }
 
-    public List<OrganizationTree> listTree() {
+    public List<OrganizationTree> buildTree() {
         // 获取组织数据
         List<Organization> list = new ArrayList<>();
         Organization organization = new Organization();
@@ -52,7 +52,7 @@ public class TreeUtilDemo {
     }
 
     /**
-     * 信息转换
+     * 数据转换
      */
     private void covert(List<OrganizationTree> trees, List<Organization> list) {
         list.forEach(data -> {

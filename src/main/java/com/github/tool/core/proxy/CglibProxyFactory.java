@@ -5,13 +5,12 @@ import net.sf.cglib.proxy.Enhancer;
 /**
  * Cglib代理工厂
  */
-public class CglibProxyFactory<T> {
+public class CglibProxyFactory {
 
-    private final Enhancer enhancer = new Enhancer();
-
-    public T newInstance(T target) {
+    public <T> T newInstance(T target, Aspect aspect) {
+        final Enhancer enhancer = new Enhancer();
         enhancer.setSuperclass(target.getClass());
-        enhancer.setCallback(new CglibProxy(target));
+        enhancer.setCallback(new CglibProxy(target, aspect));
         return (T) enhancer.create();
     }
 }

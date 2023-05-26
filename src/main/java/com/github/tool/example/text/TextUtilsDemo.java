@@ -24,8 +24,10 @@ public class TextUtilsDemo {
                 "}" +
                 "\n";
         String value;
+        // 从content中寻找consignmentNo
         value = TextUtils.findFirstKeyValue(content, "consignmentNo");
         System.out.println("value: " + value);
+        // 从content中寻找skuCode
         value = TextUtils.findFirstKeyValue(content, "skuCode");
         System.out.println("value: " + value);
     }

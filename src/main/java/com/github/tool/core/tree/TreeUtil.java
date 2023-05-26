@@ -16,7 +16,7 @@ public class TreeUtil {
     }
 
     /**
-     * 用于构建树
+     * 构建树
      *
      * @param nodes 节点
      */

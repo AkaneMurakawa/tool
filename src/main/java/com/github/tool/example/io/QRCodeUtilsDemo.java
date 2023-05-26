@@ -17,12 +17,14 @@ public class QRCodeUtilsDemo {
         String filename = skuCode + ".png";
         File tmpFile = new File(FileUtil.getTmpDir(), filename);
         tmpFile.createNewFile();
+        // 生成70*40一维码
         QRCodeUtils.createBarcodeWriteFile(skuCode, LabelTypeEnum.LABEL_7_4, tmpFile);
 
         skuCode = "SKU-002";
         filename = skuCode + ".png";
         tmpFile = new File(FileUtil.getTmpDir(), filename);
         tmpFile.createNewFile();
+        // 生成二维码
         QRCodeUtils.createQRCodeWriteFile(skuCode, 128, tmpFile);
     }
 }

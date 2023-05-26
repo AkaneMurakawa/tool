@@ -27,7 +27,7 @@ public class FileUploadUtilDemo {
                 "bill",
                 customerCode,
                 FileUtils.getDatePath());
-
+        //上传文件到FTP
         FileUploadUtil.upload2Sftp(tmpFile.getAbsoluteFile(), sftpFilePath);
     }
 }

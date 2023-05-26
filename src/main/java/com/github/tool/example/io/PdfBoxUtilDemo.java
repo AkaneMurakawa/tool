@@ -17,6 +17,7 @@ public class PdfBoxUtilDemo {
         for (int i = 1; i <= 2; i++) {
             files.add(new File("D:\\tmp\\" + i + ".pdf"));
         }
+        // 合并多个pdf文件
         File f = PdfBoxUtil.mergeMulFile(files, "D:\\merge.pdf");
         System.out.println(f.length());
     }

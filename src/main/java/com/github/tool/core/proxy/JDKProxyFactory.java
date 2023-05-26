@@ -5,12 +5,12 @@ import java.lang.reflect.Proxy;
 /**
  * JDK代理工厂
  */
-public class JDKProxyFactory<T> {
+public class JDKProxyFactory {
 
-    public T newInstance(T target) {
+    public <T> T newInstance(T target, Aspect aspect) {
         return (T) Proxy.newProxyInstance(
                 target.getClass().getClassLoader(),
                 target.getClass().getInterfaces(),
-                new JDKProxy(target));
+                new JDKProxy(target, aspect));
     }
 }

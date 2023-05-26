@@ -11,14 +11,18 @@ public class ProxyDemo {
      * test
      */
     public static void main(String[] args) {
+        LogAspect aspect = new LogAspect();
         // JDK代理
         UserServiceImpl userService = new UserServiceImpl();
-        JDKProxyFactory<UserServiceImpl> jdkProxyFactory = new JDKProxyFactory();
-        UserService proxy = jdkProxyFactory.newInstance(userService);
+        JDKProxyFactory jdkProxyFactory = new JDKProxyFactory();
+        UserService proxy = jdkProxyFactory.newInstance(userService, aspect);
         proxy.hello();
+
+        System.out.println();
+
         // Cglib代理
-        CglibProxyFactory<UserServiceImpl> cglibProxyFactory = new CglibProxyFactory();
-        proxy = cglibProxyFactory.newInstance(userService);
+        CglibProxyFactory cglibProxyFactory = new CglibProxyFactory();
+        proxy = cglibProxyFactory.newInstance(userService, aspect);
         proxy.hello();
     }
 }
