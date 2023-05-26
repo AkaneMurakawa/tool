@@ -21,8 +21,14 @@ public class HttpRequestHeadersInterceptor implements HttpRequestInterceptor {
         return true;
     }
 
+    /**
+     * 新增请求头<br>
+     * 不覆盖原有请求头
+     */
     public Map<String, String> getHeaders() {
-        return new HashMap();
+        HashMap map = new HashMap();
+        // 示例：map.put("apiSecret", "xxx")
+        return map;
     }
 
 }

@@ -1,6 +1,7 @@
 package com.github.tool.core.http;
 
 import cn.hutool.http.*;
+
 import java.util.Map;
 
 /**
@@ -43,6 +44,13 @@ public class HttClient {
 
     /**
      * 发送get请求
+     */
+    public static String get(String url) {
+        return get(url, null);
+    }
+
+    /**
+     * 发送get请求
      *
      * @param paramMap post表单数据
      */
@@ -81,6 +89,10 @@ public class HttClient {
                 .headerMap(headers, true)
                 .timeout(timeout);
         return execute(httpRequest);
+    }
+
+    public static HttpRequestWrapper wrapper(HttpRequest httpRequest) {
+        return new HttpRequestWrapper(httpRequest);
     }
 
     /**

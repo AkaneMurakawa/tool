@@ -27,7 +27,7 @@ public class HttpRequestLogInterceptor implements HttpRequestInterceptor {
             log.info("Request URI = {}", httpRequest.getUrl());
             log.info("Form = {}", httpRequest.form());
             log.info("Headers = {}", httpRequest.headers());
-            log.info("Body = {}", new String(httpRequest.bodyBytes()));
+            log.info("Body = {}", HttpUtils.getBody(httpRequest));
             log.info("");
         }
         return true;
