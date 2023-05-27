@@ -3,10 +3,9 @@ package com.github.tool.core.http;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
-import com.github.tool.core.http.interceptor.HttpRequestCookiesInterceptor;
-import com.github.tool.core.http.interceptor.HttpRequestHeadersInterceptor;
-import com.github.tool.core.http.interceptor.HttpRequestLogInterceptor;
+import com.github.tool.core.http.interceptor.*;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.util.StopWatch;
 
@@ -21,7 +20,14 @@ import java.util.List;
 @Getter
 public class HttpRequestWrapper {
 
-    private boolean isLogEnabled = true;
+    @Setter
+    private boolean isPrintEnabled = true;
+
+    @Setter
+    private boolean isLogEnabled = false;
+
+    @Setter
+    private long totalTimeMillis;
 
     private final StopWatch stopWatch = new StopWatch(Thread.currentThread().getName());
 
@@ -29,6 +35,8 @@ public class HttpRequestWrapper {
 
     static {
         // addInterceptors
+        interceptors.add(new HttpRequestTimeInterceptor());
+        interceptors.add(new HttpRequestPrintInterceptor());
         interceptors.add(new HttpRequestLogInterceptor());
         interceptors.add(new HttpRequestHeadersInterceptor());
         interceptors.add(new HttpRequestCookiesInterceptor());
@@ -39,11 +47,6 @@ public class HttpRequestWrapper {
 
     public HttpRequestWrapper(HttpRequest httpRequest) {
         this.httpRequest = httpRequest;
-    }
-
-    public HttpRequestWrapper isLogEnabled(boolean isLogEnabled) {
-        this.isLogEnabled = isLogEnabled;
-        return this;
     }
 
     private void before() {

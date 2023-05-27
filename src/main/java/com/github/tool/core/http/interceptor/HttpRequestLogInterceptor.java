@@ -6,7 +6,6 @@ import com.github.tool.core.http.HttpRequestInterceptor;
 import com.github.tool.core.http.HttpRequestWrapper;
 import com.github.tool.core.http.HttpUtils;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.util.StopWatch;
 
 import java.util.Objects;
 
@@ -19,8 +18,6 @@ public class HttpRequestLogInterceptor implements HttpRequestInterceptor {
     @Override
     public boolean beforeHandle(HttpRequestWrapper httpRequestWrapper) {
         HttpRequest httpRequest = httpRequestWrapper.getHttpRequest();
-        StopWatch stopWatch = httpRequestWrapper.getStopWatch();
-        stopWatch.start();
         if (httpRequestWrapper.isLogEnabled()) {
             log.info("HTTP Request");
             log.info("HTTP Method = {}", httpRequest.getMethod());
@@ -38,16 +35,14 @@ public class HttpRequestLogInterceptor implements HttpRequestInterceptor {
         if (Objects.isNull(response)) {
             return true;
         }
-        StopWatch stopWatch = httpRequestWrapper.getStopWatch();
-        stopWatch.stop();
         if (httpRequestWrapper.isLogEnabled()) {
             log.info("HTTP Response");
             log.info("Status = {}", response.getStatus());
-            log.info("Time = {} ms", stopWatch.getTotalTimeMillis());
+            log.info("Time = {} ms", httpRequestWrapper.getTotalTimeMillis());
             log.info("Size = {}", HttpUtils.getSize(response.body()));
             log.info("Headers = {}", response.headers());
-            log.info("Body = {}", response.body());
             log.info("Cookies = {}", response.getCookies());
+            log.info("Body = {}", response.body());
             log.info("");
         }
         return true;

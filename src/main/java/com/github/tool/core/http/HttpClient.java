@@ -5,11 +5,11 @@ import cn.hutool.http.*;
 import java.util.Map;
 
 /**
- * HttClient
+ * HttpClient
  *
  * @see cn.hutool.http.HttpUtil
  */
-public class HttClient {
+public class HttpClient {
 
     /**
      * 创建Http请求对象
@@ -69,7 +69,7 @@ public class HttClient {
         HttpRequest httpRequest = HttpRequest
                 .get(url)
                 .form(paramMap)
-                .headerMap(headers, true)
+                .addHeaders(headers)
                 .timeout(timeout);
         return execute(httpRequest);
     }
@@ -86,7 +86,7 @@ public class HttClient {
         HttpRequest httpRequest = HttpRequest
                 .post(url)
                 .body(body)
-                .headerMap(headers, true)
+                .addHeaders(headers)
                 .timeout(timeout);
         return execute(httpRequest);
     }
