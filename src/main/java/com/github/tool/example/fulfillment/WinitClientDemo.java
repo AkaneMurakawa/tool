@@ -2,6 +2,7 @@ package com.github.tool.example.fulfillment;
 
 import cn.hutool.http.Method;
 import com.github.tool.fulfillment.winit.WinitClient;
+import com.github.tool.fulfillment.winit.WinitProperties;
 
 public class WinitClientDemo {
 
@@ -9,7 +10,7 @@ public class WinitClientDemo {
      * test
      */
     public static void main(String[] args) {
-        WinitClient client = new WinitClient();
+        WinitClient client = new WinitClient(new WinitProperties());
         String data = "{\n" +
                 "\"pageNum\": \"1\",\n" +
                 "\"pageSize\": \"10\",\n" +

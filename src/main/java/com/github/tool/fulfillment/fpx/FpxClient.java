@@ -20,7 +20,11 @@ public class FpxClient {
 
     private static final String SANDBOX_URL = "https://open-test.4px.com";
 
-    private final FpxProperties fpxProperties = new FpxProperties();
+    private final FpxProperties fpxProperties;
+
+    public FpxClient(FpxProperties fpxProperties) {
+        this.fpxProperties = fpxProperties;
+    }
 
     /**
      * 发送请求

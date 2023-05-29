@@ -17,7 +17,11 @@ public class ArmLogiClient {
 
     private static final String SANDBOX_URL = "https://apisandbox.armlogi.com";
 
-    private final ArmLogiProperties armlogiProperties = new ArmLogiProperties();
+    private final ArmLogiProperties armlogiProperties;
+
+    public ArmLogiClient(ArmLogiProperties armlogiProperties) {
+        this.armlogiProperties = armlogiProperties;
+    }
 
     /**
      * 发送请求

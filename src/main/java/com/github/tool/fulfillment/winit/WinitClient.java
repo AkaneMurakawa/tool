@@ -20,13 +20,17 @@ import java.time.format.DateTimeFormatter;
  */
 public class WinitClient {
 
-    private final WinitProperties winitProperties = new WinitProperties();
-
-    private final ObjectMapper objectMapper = new ObjectMapper();
-
     private static final String URL = "https://openapi.winit.com.cn/openapi/service";
 
     private static final String SANDBOX_URL = "https://sandboxopenapi.winit.com.cn/openapi/service";
+
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
+    private final WinitProperties winitProperties;
+
+    public WinitClient(WinitProperties winitProperties) {
+        this.winitProperties = winitProperties;
+    }
 
     /**
      * 发送请求

@@ -2,6 +2,7 @@ package com.github.tool.example.fulfillment;
 
 import cn.hutool.http.Method;
 import com.github.tool.fulfillment.armlogi.ArmLogiClient;
+import com.github.tool.fulfillment.armlogi.ArmLogiProperties;
 
 public class ArmLogiClientDemo {
 
@@ -9,7 +10,7 @@ public class ArmLogiClientDemo {
      * test
      */
     public static void main(String[] args) {
-        ArmLogiClient client = new ArmLogiClient();
+        ArmLogiClient client = new ArmLogiClient(new ArmLogiProperties());
         String data = "{\n" +
                 "\"pageIndex\": 1,\n" +
                 "\"pageSize\": 10,\n" +

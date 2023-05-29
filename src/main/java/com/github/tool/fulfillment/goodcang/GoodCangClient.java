@@ -16,7 +16,11 @@ public class GoodCangClient {
 
     private static final String SANDBOX_URL = "https://uat-oms.eminxing.com/public_open";
 
-    private final GoodCangProperties goodCangProperties = new GoodCangProperties();
+    private final GoodCangProperties goodCangProperties;
+
+    public GoodCangClient(GoodCangProperties goodCangProperties) {
+        this.goodCangProperties = goodCangProperties;
+    }
 
     /**
      * 发送请求

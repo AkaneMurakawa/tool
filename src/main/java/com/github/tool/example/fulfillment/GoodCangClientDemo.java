@@ -2,6 +2,7 @@ package com.github.tool.example.fulfillment;
 
 import cn.hutool.http.Method;
 import com.github.tool.fulfillment.goodcang.GoodCangClient;
+import com.github.tool.fulfillment.goodcang.GoodCangProperties;
 
 public class GoodCangClientDemo {
 
@@ -9,7 +10,7 @@ public class GoodCangClientDemo {
      * test
      */
     public static void main(String[] args) {
-        GoodCangClient client = new GoodCangClient();
+        GoodCangClient client = new GoodCangClient(new GoodCangProperties());
         String data = "{\n" +
                 "\"page\": \"1\",\n" +
                 "\"page_size\": \"200\",\n" +
