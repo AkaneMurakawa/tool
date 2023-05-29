@@ -11,10 +11,17 @@ public class ArmLogiClientDemo {
      */
     public static void main(String[] args) {
         ArmLogiClient client = new ArmLogiClient(new ArmLogiProperties());
+        getInventory(client);
+    }
+
+    /**
+     * 查询库存
+     */
+    public static void getInventory(ArmLogiClient client) {
         String data = "{\n" +
                 "\"pageIndex\": 1,\n" +
                 "\"pageSize\": 10,\n" +
-                "  \"skuCode\": \"B2SPU02\"\n" +
+                "\"skuCode\": \"B2SPU02\"\n" +
                 "}";
         String apiMethod = "/api/v1/prodcut/listsSkuStock";
         client.request(Method.POST, apiMethod, data);

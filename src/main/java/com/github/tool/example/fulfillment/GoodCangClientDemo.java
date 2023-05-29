@@ -11,6 +11,13 @@ public class GoodCangClientDemo {
      */
     public static void main(String[] args) {
         GoodCangClient client = new GoodCangClient(new GoodCangProperties());
+        getInventory(client);
+    }
+
+    /**
+     * 查询库存
+     */
+    public static void getInventory(GoodCangClient client) {
         String data = "{\n" +
                 "\"page\": \"1\",\n" +
                 "\"page_size\": \"200\",\n" +

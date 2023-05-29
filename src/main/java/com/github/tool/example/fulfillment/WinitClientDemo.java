@@ -11,6 +11,13 @@ public class WinitClientDemo {
      */
     public static void main(String[] args) {
         WinitClient client = new WinitClient(new WinitProperties());
+        getInventory(client);
+    }
+
+    /**
+     * 查询库存
+     */
+    public static void getInventory(WinitClient client) {
         String data = "{\n" +
                 "\"pageNum\": \"1\",\n" +
                 "\"pageSize\": \"10\",\n" +
