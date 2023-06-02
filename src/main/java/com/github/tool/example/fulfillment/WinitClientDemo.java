@@ -11,7 +11,8 @@ public class WinitClientDemo {
      */
     public static void main(String[] args) {
         WinitClient client = new WinitClient(new WinitProperties());
-        getInventory(client);
+        // getInventory(client);
+        getWarehouse(client);
     }
 
     /**
@@ -26,5 +27,10 @@ public class WinitClientDemo {
                 "}";
         String apiMethod = "queryWarehouseStorage";
         client.request(Method.POST, apiMethod, data);
+    }
+
+    public static void getWarehouse(WinitClient client){
+        String apiMethod = "queryWarehouse";
+        client.request(Method.POST, apiMethod, null);
     }
 }
