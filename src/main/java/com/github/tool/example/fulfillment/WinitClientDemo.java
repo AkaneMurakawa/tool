@@ -19,6 +19,7 @@ public class WinitClientDemo {
      * 查询库存
      */
     public static void getInventory(WinitClient client) {
+        //language=JSON
         String data = "{\n" +
                 "\"pageNum\": \"1\",\n" +
                 "\"pageSize\": \"10\",\n" +

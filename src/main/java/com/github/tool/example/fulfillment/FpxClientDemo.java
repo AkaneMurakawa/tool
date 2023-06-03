@@ -11,14 +11,15 @@ public class FpxClientDemo {
      */
     public static void main(String[] args) {
         FpxClient client = new FpxClient(new FpxProperties());
-        // getInventory(client);
-        getInventoryAge(client);
+        getInventory(client);
+        // getInventoryAge(client);
     }
 
     /**
      * 查询库存
      */
     public static void getInventory(FpxClient client) {
+        //language=JSON
         String data = "{\n" +
                 "\"page_no\": 1,\n" +
                 "\"page_size\": 10,\n" +
@@ -32,6 +33,7 @@ public class FpxClientDemo {
      * 查询库龄
      */
     public static void getInventoryAge(FpxClient client) {
+        //language=JSON
         String data = "{\n" +
                 "\"warehouse_code\": \"USUSAE\",\n" +
                 "\"lstsku\": [\n" +

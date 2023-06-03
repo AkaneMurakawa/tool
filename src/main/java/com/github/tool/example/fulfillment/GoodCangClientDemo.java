@@ -18,6 +18,7 @@ public class GoodCangClientDemo {
      * 查询库存
      */
     public static void getInventory(GoodCangClient client) {
+        //language=JSON
         String data = "{\n" +
                 "\"page\": \"1\",\n" +
                 "\"page_size\": \"200\",\n" +

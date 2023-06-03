@@ -18,6 +18,7 @@ public class ArmLogiClientDemo {
      * 查询库存
      */
     public static void getInventory(ArmLogiClient client) {
+        //language=JSON
         String data = "{\n" +
                 "\"pageIndex\": 1,\n" +
                 "\"pageSize\": 10,\n" +
