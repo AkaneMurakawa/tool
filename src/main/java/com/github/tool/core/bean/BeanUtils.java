@@ -1,6 +1,7 @@
-package com.github.tool.core.list;
+package com.github.tool.core.bean;
 
 import cn.hutool.core.lang.Assert;
+import com.github.tool.core.list.ListUtils;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.ClassUtils;
