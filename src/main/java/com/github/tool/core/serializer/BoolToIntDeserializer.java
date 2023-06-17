@@ -15,10 +15,7 @@ public class BoolToIntDeserializer extends JsonDeserializer<Integer> {
 
     @Override
     public Integer deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
-        Object value = jsonParser.getBooleanValue();
-        if (null == value) {
-            return null;
-        }
+        boolean value = jsonParser.getBooleanValue();
         if (Boolean.TRUE.equals(value)) {
             return 1;
         } else {
