@@ -17,7 +17,7 @@ public class FileUtils {
      * @param format 文件夹格式，例如："yyyyMMdd"，"yyyy-MM-dd"
      * @return 日期文件夹
      */
-    public static String getDateDir(String format) {
+    public static String getDatePath(String format) {
         return LocalDateTimeUtil.format(LocalDate.now(), format);
     }
 

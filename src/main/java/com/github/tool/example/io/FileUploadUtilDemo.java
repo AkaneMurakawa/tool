@@ -19,7 +19,7 @@ public class FileUploadUtilDemo {
         String filename = String.join("-",
                 "bill",
                 customerCode,
-                FileUtils.getDateDir("yyyyMMdd") + ".csv");
+                FileUtils.getDatePath("yyyyMMdd") + ".csv");
         File tmpFile = new File(FileUtil.getTmpDir(), filename);
         tmpFile.createNewFile();
         // bill/10001/2023/01/02
