@@ -12,7 +12,7 @@ public class SgsChainClientDemo {
      */
     public static void main(String[] args) {
         SgsChainClient client = new SgsChainClient(new SgsChainProperties());
-        // getWarehouse(client);
+        getWarehouse(client);
         getProduct(client);
         getInventory(client);
     }
@@ -23,7 +23,7 @@ public class SgsChainClientDemo {
                 "\"page\": \"1\",\n" +
                 "\"pageSize\": \"50\"\n" +
                 "}";
-        String apiMethod = "cdm.api.basics.warehouse.getWarehouseService";
+        String apiMethod = "cdm.api.basics.warehouse.getWarehouseServiceByRes";
         client.request(Method.POST, apiMethod, ApiTypeEnum.CDM_API.getType(), data);
     }
 
@@ -40,7 +40,7 @@ public class SgsChainClientDemo {
 
     public static void getInventory(SgsChainClient client) {
         //language=JSON
-        String data = "{\"productNos\":[\"OT-LMLZBY-1578-US-1\"]}";
+        String data = "{\"productNos\":[\"OT-LMLZBY-1578-US-1\"], \"warehouseId\": \"SGSCA\"}";
         String apiMethod = "oms.api.warehouse.storage.getInventory";
         client.request(Method.POST, apiMethod, ApiTypeEnum.OMS_API.getType(), data);
     }
