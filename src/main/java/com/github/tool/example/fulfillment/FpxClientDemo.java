@@ -11,8 +11,9 @@ public class FpxClientDemo {
      */
     public static void main(String[] args) {
         FpxClient client = new FpxClient(new FpxProperties());
-        getInventory(client);
+        // getInventory(client);
         // getInventoryAge(client);
+        getInventoryLog(client);
     }
 
     /**
@@ -41,6 +42,21 @@ public class FpxClientDemo {
                 "]\n" +
                 "}";
         String apiMethod = "fu.wms.inventory.getdetail";
+        client.request(Method.POST, apiMethod, data);
+    }
+
+    /**
+     * 查询库存流水
+     */
+    public static void getInventoryLog(FpxClient client) {
+        //language=JSON
+        String data = "{\n" +
+                "\"page_no\": 1,\n" +
+                "\"page_size\": 10,\n" +
+                "\"create_time_start\": 1689493344000,\n" +
+                "\"warehouse_code\": \"AUSYDA\"\n" +
+                "}";
+        String apiMethod = "fu.wms.inventory.getlog";
         client.request(Method.POST, apiMethod, data);
     }
 }
