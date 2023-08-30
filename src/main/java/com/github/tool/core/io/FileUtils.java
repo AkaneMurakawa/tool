@@ -4,6 +4,8 @@ import cn.hutool.core.date.LocalDateTimeUtil;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDate;
 
 /**
@@ -68,5 +70,16 @@ public class FileUtils {
             System.out.println(line);
         }
         br.close();
+    }
+
+    /**
+     * 读取文本
+     *
+     * @param filename 文件名
+     * @since 11
+     */
+    public static void readString(String filename) throws IOException {
+        String s = Files.readString(Path.of(filename));
+        System.out.println(s);
     }
 }

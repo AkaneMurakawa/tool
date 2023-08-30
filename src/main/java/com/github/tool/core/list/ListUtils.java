@@ -56,6 +56,30 @@ public final class ListUtils {
     }
 
     /**
+     * 过滤，从头开始筛选，遇到不满足的就结束了
+     *
+     * @since 9
+     */
+    public static <T> List<T> takeWhile(Collection<T> list, Predicate<? super T> predicate) {
+        if (CollectionUtils.isEmpty(list)) {
+            return Lists.newArrayList();
+        }
+        return list.stream().takeWhile(predicate).toList();
+    }
+
+    /**
+     * 过滤，从头开始删除，遇到不满足的就结束了
+     *
+     * @since 9
+     */
+    public static <T> List<T> dropWhile(Collection<T> list, Predicate<? super T> predicate) {
+        if (CollectionUtils.isEmpty(list)) {
+            return Lists.newArrayList();
+        }
+        return list.stream().dropWhile(predicate).toList();
+    }
+
+    /**
      * 过滤出存在于指定集合中的對象
      *
      * @param list       原集合
