@@ -1,5 +1,8 @@
 package com.github.tool.example.test;
 
+import jdk.incubator.vector.FloatVector;
+import jdk.incubator.vector.VectorSpecies;
+
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -8,7 +11,21 @@ import java.util.stream.IntStream;
 public class Test {
 
     public static void main(String[] args) throws IOException {
-        virtualThread();
+        // virtualThread();
+    }
+
+    // 选择合适的分批大小
+    static final VectorSpecies<Float> SPECIES = FloatVector.SPECIES_PREFERRED;
+
+    static void vectorComputation(float[] a, float[] b, float[] c) {
+        int i = 0;
+        int upperBound = SPECIES.loopBound(a.length);
+        for (; i < upperBound; i += SPECIES.length()) {
+            FloatVector va = FloatVector.fromArray(SPECIES, a, i);
+            FloatVector vb = FloatVector.fromArray(SPECIES, b, i);
+            var vc = va.mul(va).add(vb.mul(vb)).neg();
+            vc.intoArray(c, i);
+        }
     }
 
     /**
