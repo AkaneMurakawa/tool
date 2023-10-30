@@ -24,7 +24,7 @@ public class GoodCangClientDemo {
                 "\"page\": \"1\",\n" +
                 "\"pageSize\": \"10\",\n" +
                 "\"warehouse_code\": \"USWE\",\n" +
-                "\"product_sku_list\": [\n" +
+                "\"product_sku_arr\": [\n" +
                 "  \"JWMKZ6LUSZFP\"\n" +
                 "]\n" +
                 "}";
