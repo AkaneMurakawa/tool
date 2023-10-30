@@ -11,9 +11,9 @@ public class FpxClientDemo {
      */
     public static void main(String[] args) {
         FpxClient client = new FpxClient(new FpxProperties());
-        // getInventory(client);
+        getInventory(client);
         // getInventoryAge(client);
-        getInventoryLog(client);
+        // getInventoryLog(client);
     }
 
     /**
@@ -24,7 +24,8 @@ public class FpxClientDemo {
         String data = "{\n" +
                 "\"page_no\": 1,\n" +
                 "\"page_size\": 10,\n" +
-                "\"warehouse_code\": \"USUSAE\"\n" +
+                "\"warehouse_code\": \"USLAXA\",\n" +
+                "\"lstsku\": [\"BI-TWYJ-258\"]\n" +
                 "}";
         String apiMethod = "fu.wms.inventory.get";
         client.request(Method.POST, apiMethod, data);

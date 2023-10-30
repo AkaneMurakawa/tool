@@ -11,8 +11,8 @@ public class GoodCangClientDemo {
      */
     public static void main(String[] args) {
         GoodCangClient client = new GoodCangClient(new GoodCangProperties());
-        // getInventory(client);
-        getInventoryLog(client);
+        getInventory(client);
+        // getInventoryLog(client);
     }
 
     /**
@@ -22,13 +22,13 @@ public class GoodCangClientDemo {
         //language=JSON
         String data = "{\n" +
                 "\"page\": \"1\",\n" +
-                "\"page_size\": \"200\",\n" +
-                "\"warehouse_code\": \"UK\",\n" +
+                "\"pageSize\": \"10\",\n" +
+                "\"warehouse_code\": \"USWE\",\n" +
                 "\"product_sku_list\": [\n" +
-                "  \"TEST180717\"\n" +
+                "  \"JWMKZ6LUSZFP\"\n" +
                 "]\n" +
                 "}";
-        String apiMethod = "/inventory/inventory_age_list";
+        String apiMethod = "/inventory/get_product_inventory";
         client.request(Method.POST, apiMethod, data);
     }
 
