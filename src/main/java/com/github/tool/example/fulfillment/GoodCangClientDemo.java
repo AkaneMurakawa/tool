@@ -25,7 +25,7 @@ public class GoodCangClientDemo {
                 "\"pageSize\": \"10\",\n" +
                 "\"warehouse_code\": \"USWE\",\n" +
                 "\"product_sku_arr\": [\n" +
-                "  \"JWMKZ6LUSZFP\"\n" +
+                "  \"JJWMKZ6LUSZFP\"\n" +
                 "]\n" +
                 "}";
         String apiMethod = "/inventory/get_product_inventory";
