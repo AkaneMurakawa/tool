@@ -11,8 +11,26 @@ public class GoodCangClientDemo {
      */
     public static void main(String[] args) {
         GoodCangClient client = new GoodCangClient(new GoodCangProperties());
-        getInventory(client);
+        getPhysicalInventory(client);
+        // getInventory(client);
         // getInventoryLog(client);
+    }
+
+    /**
+     * 查询物理库存
+     */
+    public static void getPhysicalInventory(GoodCangClient client) {
+        //language=JSON
+        String data = "{\n" +
+                "\"page\": \"1\",\n" +
+                "\"pageSize\": \"10\",\n" +
+                "\"wp_code_list\": [\"USEA-5\"],\n" +
+                "\"product_sku_list\": [\n" +
+                "  \"AB11345MM\"\n" +
+                "]\n" +
+                "}";
+        String apiMethod = "/inventory/physical_warehouse_inventory";
+        client.request(Method.POST, apiMethod, data);
     }
 
     /**
@@ -23,9 +41,9 @@ public class GoodCangClientDemo {
         String data = "{\n" +
                 "\"page\": \"1\",\n" +
                 "\"pageSize\": \"10\",\n" +
-                "\"warehouse_code\": \"USWE\",\n" +
+                "\"warehouse_code\": \"USEA\",\n" +
                 "\"product_sku_arr\": [\n" +
-                "  \"JJWMKZ6LUSZFP\"\n" +
+                "  \"AC21383MM\"\n" +
                 "]\n" +
                 "}";
         String apiMethod = "/inventory/get_product_inventory";
