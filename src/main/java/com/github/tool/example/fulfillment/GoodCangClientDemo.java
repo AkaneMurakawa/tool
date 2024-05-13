@@ -11,9 +11,15 @@ public class GoodCangClientDemo {
      */
     public static void main(String[] args) {
         GoodCangClient client = new GoodCangClient(new GoodCangProperties());
-        getPhysicalInventory(client);
+        getSmCodeTwcToWarehouse(client);
+        // getPhysicalInventory(client);
         // getInventory(client);
         // getInventoryLog(client);
+    }
+
+    public static void getSmCodeTwcToWarehouse(GoodCangClient client) {
+        String apiMethod = "/inbound_order/get_smcode_twc_to_warehouse";
+        client.request(Method.POST, apiMethod, null);
     }
 
     /**
